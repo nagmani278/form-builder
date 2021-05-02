@@ -15,8 +15,9 @@ const StyledStatic = styled.div`
     padding: 8px;
     gap: 16px;
     align-items: center;
+    justify-content: space-around;
     & .input_box {
-      width: 100%;
+      width: 80%;
       border: 1px solid black;
     }
   }

@@ -15,10 +15,12 @@ const StyledText = styled.div`
     padding: 8px;
     gap: 16px;
     align-items: center;
+    justify-content: space-around;
     & .right {
-      width: 100%;
+      width: 80%;
       display: flex;
       flex-direction: column;
+      gap: 16px;
       & .input_box {
         width: 100%;
         border: 1px solid black;
@@ -27,6 +29,9 @@ const StyledText = styled.div`
         display: flex;
         gap: 16px;
         align-items: center;
+        & .input_count {
+            width: auto;
+        }
       }
     }
   }
@@ -46,7 +51,7 @@ const Text = ({ listTemp, setList, index, listObj }) => {
         message.error("Please enter number");
         return;
     }
-    listTemp[index].maximumCharacters = value;
+    listTemp[index].maximumCharacters = valueTemp ? valueTemp : '';
     setList([...listTemp]);
   };
 
@@ -55,6 +60,7 @@ const Text = ({ listTemp, setList, index, listObj }) => {
       <div className="box">
         <span>Text</span>
         <div className="right">
+          <span>Title</span>
           <Input
             name="title"
             size="large"
@@ -71,6 +77,7 @@ const Text = ({ listTemp, setList, index, listObj }) => {
               placeholder=""
               value={listObj?.maximumCharacters}
               onChange={handleCount}
+              className="input_count"
             />
           </div>
         </div>

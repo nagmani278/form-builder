@@ -15,8 +15,9 @@ const StyledRadio = styled.div`
     padding: 8px;
     gap: 16px;
     align-items: center;
+    justify-content: space-around;
     & .right {
-      width: 100%;
+      width: 80%;
       display: flex;
       flex-direction: column;
       & .input_box {
@@ -27,8 +28,11 @@ const StyledRadio = styled.div`
         display: flex;
         flex-direction: column;
         gap: 16px;
-        align-items: center;
+        align-items: flex-start;
         padding: 16px 0px;
+      }
+      & .add_button {
+          width: max-content;
       }
     }
   }
@@ -57,6 +61,7 @@ const Radio = ({ listTemp, setList, index, listObj }) => {
       <div className="box">
         <span>Radio</span>
         <div className="right">
+          <span>Title</span>
           <Input
             name="title"
             size="large"
@@ -66,6 +71,7 @@ const Radio = ({ listTemp, setList, index, listObj }) => {
             className="input_box"
           />
           <div className="options">
+            <span>Options</span>
             {listObj?.options?.map((option, ind) => {
               return (
                 <Input
@@ -83,6 +89,7 @@ const Radio = ({ listTemp, setList, index, listObj }) => {
           <Button
             size="small"
             type="primary"
+            className="add_button"
             onClick={() => {
               addOption();
             }}
