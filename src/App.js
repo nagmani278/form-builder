@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import styled from "styled-components";
-import { Button, Modal } from "antd";
+import { Button, Modal, message } from "antd";
 import Static from "./components/Static";
+import Text from "./components/Text";
+import Radio from "./components/Radio";
+
+message.config({
+  top: 100,
+  duration: 2,
+  maxCount: 1,
+});
 
 const StyledApp = styled.div`
   width: 100%;
@@ -47,6 +55,16 @@ function App() {
     };
     if(element === "static") {
       tempObj.value = "";
+    }
+    if(element === "text"){
+      tempObj.title = "";
+      tempObj.maximumCharacters = 20;
+      tempObj.reply = "";
+    }
+    if(element === "radio"){
+      tempObj.title = "";
+      tempObj.options = [];
+      tempObj.reply = -1;
     } 
     listTemp.push(tempObj);
     setList([...listTemp]);
@@ -59,6 +77,12 @@ function App() {
           {list.map((listObj, index) => {
             if (listObj?.type === "static") {
               return <Static listTemp={listTemp} setList={setList} index={index} listObj={listObj} />;
+            }
+            else if (listObj?.type === "text"){
+              return <Text listTemp={listTemp} setList={setList} index={index} listObj={listObj} />
+            }
+            else if (listObj?.type === "radio"){
+              return <Radio listTemp={listTemp} setList={setList} index={index} listObj={listObj} />
             }
           })}
         </div>

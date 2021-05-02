@@ -5,7 +5,6 @@ import Controls from "./Controls";
 
 const StyledStatic = styled.div`
   width: 100%;
-  height: 100px;
   display: flex;
   align-items: center;
   gap: 16px;

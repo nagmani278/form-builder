@@ -7,12 +7,6 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 
-message.config({
-  top: 100,
-  duration: 2,
-  maxCount: 1,
-});
-
 const StyledControls = styled.div`
   border: 1px solid black;
   & .controls {
