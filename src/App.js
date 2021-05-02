@@ -5,6 +5,7 @@ import { Button, Modal, message } from "antd";
 import Static from "./components/Static";
 import Text from "./components/Text";
 import Radio from "./components/Radio";
+import DropDown from "./components/DropDown";
 
 message.config({
   top: 100,
@@ -53,21 +54,36 @@ function App() {
     const tempObj = {
       type: element,
     };
-    if(element === "static") {
+    if (element === "static") {
       tempObj.value = "";
     }
-    if(element === "text"){
+    if (element === "text") {
       tempObj.title = "";
       tempObj.maximumCharacters = 20;
       tempObj.reply = "";
     }
-    if(element === "radio"){
+    if (element === "radio") {
       tempObj.title = "";
       tempObj.options = [];
       tempObj.reply = -1;
-    } 
+    }
+    if (element === "dropdown") {
+      tempObj.title = "";
+      tempObj.options = [];
+      tempObj.reply = -1;
+    }
     listTemp.push(tempObj);
     setList([...listTemp]);
+  };
+
+  const downloadJSON = () => {
+    let dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(listTemp));
+    let dlAnchorElem = document.createElement("a");
+    dlAnchorElem.setAttribute("href", dataStr);
+    dlAnchorElem.setAttribute("download", "form.json");
+    dlAnchorElem.click();
   };
 
   return (
@@ -76,13 +92,41 @@ function App() {
         <div className="list">
           {list.map((listObj, index) => {
             if (listObj?.type === "static") {
-              return <Static listTemp={listTemp} setList={setList} index={index} listObj={listObj} />;
-            }
-            else if (listObj?.type === "text"){
-              return <Text listTemp={listTemp} setList={setList} index={index} listObj={listObj} />
-            }
-            else if (listObj?.type === "radio"){
-              return <Radio listTemp={listTemp} setList={setList} index={index} listObj={listObj} />
+              return (
+                <Static
+                  listTemp={listTemp}
+                  setList={setList}
+                  index={index}
+                  listObj={listObj}
+                />
+              );
+            } else if (listObj?.type === "text") {
+              return (
+                <Text
+                  listTemp={listTemp}
+                  setList={setList}
+                  index={index}
+                  listObj={listObj}
+                />
+              );
+            } else if (listObj?.type === "radio") {
+              return (
+                <Radio
+                  listTemp={listTemp}
+                  setList={setList}
+                  index={index}
+                  listObj={listObj}
+                />
+              );
+            } else if (listObj?.type === "dropdown") {
+              return (
+                <DropDown
+                  listTemp={listTemp}
+                  setList={setList}
+                  index={index}
+                  listObj={listObj}
+                />
+              );
             }
           })}
         </div>
@@ -94,7 +138,12 @@ function App() {
         >
           Add components
         </Button>
-        <Button size="large" type="primary" className="download_button">
+        <Button
+          size="large"
+          type="primary"
+          className="download_button"
+          onClick={downloadJSON}
+        >
           Download JSON
         </Button>
       </div>
@@ -105,7 +154,7 @@ function App() {
         onCancel={handleCancel}
         footer={[]}
       >
-        <div style={{display: "flex", flexDirection: "column", gap: "16px"}}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <Button
             size="small"
             type="primary"
